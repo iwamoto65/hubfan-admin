@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+const Team: NextPage = () => {
   return (
     <>
       <p className='p-10 text-red-600'>
-        Hello world!
+        Team
       </p>
     </>
   )
 }
 
-export default Home
+export default Team
