@@ -12,7 +12,7 @@ export const Layout = ({ children }: Props) => {
         <div className="basis-1/6">
           <DarkSidenav />
         </div>
-        <div className="basis-5/6">
+        <div className="basis-5/6 bg-slate-200">
           <main>{ children }</main>
         </div>
       </div>

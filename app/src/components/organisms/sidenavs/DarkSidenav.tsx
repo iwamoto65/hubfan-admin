@@ -24,6 +24,9 @@ export const DarkSidenav = () => {
       <div className="h-full overflow-y-auto py-4 px-3 bg-gray-50 dark:bg-gray-800">
         <ul className="space-y-2">
           <li>
+            <h1 className="ml-3 text-2xl mt-5 mb-6 font-mono dark:text-lime-400">Gaia</h1>
+          </li>
+          <li>
             <Link href="/">
               <a className={ linkStyles }>
                 <HomeIcon />
