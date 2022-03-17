@@ -1,6 +1,9 @@
 import Link from "next/link"
 import { HomeIcon } from "src/components/atoms/icons/HomeIcon"
+import { CompanyIcon } from "src/components/atoms/icons/CompanyIcon"
+import { GameIcon } from "src/components/atoms/icons/GameIcon"
 import { TeamIcon } from "src/components/atoms/icons/TeamIcon"
+import { PlayerIcon } from "src/components/atoms/icons/PlayerIcon"
 
 export const DarkSidenav = () => {
   const linkStyles = `
@@ -29,10 +32,34 @@ export const DarkSidenav = () => {
             </Link>
           </li>
           <li>
+            <Link href="/companies">
+              <a className={ linkStyles }>
+                <CompanyIcon />
+                <span className="ml-3">企業</span>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/games">
+              <a className={ linkStyles }>
+                <GameIcon />
+                <span className="ml-3">ゲーム</span>
+              </a>
+            </Link>
+          </li>
+          <li>
             <Link href="/teams">
               <a className={ linkStyles }>
                 <TeamIcon />
                 <span className="ml-3">チーム</span>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/players">
+              <a className={ linkStyles }>
+                <PlayerIcon />
+                <span className="ml-3">プレイヤー</span>
               </a>
             </Link>
           </li>
