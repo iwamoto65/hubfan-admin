@@ -5,7 +5,7 @@ const Team: NextPage = () => {
   const pageToEdit = (name: string): Promise<boolean> => Router.push(`/teams/${name}`);
   const destroyData = (id: number): number => id;
 
-  const teams = [
+  const teams: { id: number, name: string, dateEstablished: string, numberOfMembers: number }[] = [
     { id: 1, name: '123', dateEstablished: '2021/12/12', numberOfMembers: 3 },
     { id: 2, name: '456', dateEstablished: '2012/12/12', numberOfMembers: 2 },
     { id: 3, name: '789', dateEstablished: '2045/12/12', numberOfMembers: 1 },
