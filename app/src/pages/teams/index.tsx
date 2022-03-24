@@ -19,18 +19,91 @@ const SearchForm = (props: NameStateType) => {
   const { nameSearchWord, setNameSearchWord } = props;
   const { register, handleSubmit, formState: { errors } } = useForm<InputsType>();
   const onSubmit: SubmitHandler<InputsType> = data => setNameSearchWord(data.name);
+  const [isClicked, setIsClicked] = useState<boolean>(false)
 
   return (
-    <div className='m-10'>
-      <form onSubmit={handleSubmit(onSubmit)} >
-        <label htmlFor="name">チーム名</label>
-        <br />
-        <input type="text" defaultValue={nameSearchWord} {...register("name")} />
-        <br />
-        {errors.name && <span>エラー：{ errors }</span>}
-        <button type='submit'>検索</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-5 rounded shadow-md">
+      {isClicked ?
+        (
+          <div className='grid grid-cols-12 grid-rows-1'>
+            <div className='col-start-1 col-span-9'>
+              <input
+                type="text"
+                defaultValue={nameSearchWord}
+                {...register("name")}
+                placeholder="チーム名を入力"
+                className="border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full" />
+              <p>{errors.name && <span>エラー：{errors}</span>}</p>
+            </div>
+
+            <div className='col-start-10 col-span-1 flex justify-center'>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 mt-2 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1"
+                onClick={() => setIsClicked(!isClicked)}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+
+            <div className='col-start-11 col-span-2 text-center'>
+              <button
+                type='submit'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+              >
+                検索
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className='grid grid-cols-12 grid-rows-2 gap-y-5'>
+            <div className='col-start-1 col-span-9'>
+              <input
+                type="text"
+                defaultValue={nameSearchWord}
+                {...register("name")}
+                placeholder="チーム名を入力"
+                className="border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full" />
+              <p>{errors.name && <span>エラー：{errors}</span>}</p>
+            </div>
+
+            <div className='col-start-10 col-span-1 flex justify-center'>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 mt-2 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1"
+                onClick={() => setIsClicked(!isClicked)}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+              </svg>
+            </div>
+
+            <div className='col-start-1 col-span-10'>
+              <label htmlFor="date-established" className='mr-5'>設立年月日</label>
+              <input type="date" className='p-1 border border-gray-300 focus:border-blue-500 focus:outline-none' />
+              <span className='mx-3'>~</span>
+              <input type="date" className='p-1 border border-gray-300 focus:border-blue-500 focus:outline-none' />
+            </div>
+
+            <div className='col-start-11 col-span-2 text-center'>
+              <button
+                type='submit'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+              >
+                検索
+              </button>
+            </div>
+          </div>
+        )
+      }
+    </form>
   )
 }
 
@@ -44,15 +117,21 @@ const Team: NextPage = () => {
 
   return (
     <>
-      <SearchForm
-        nameSearchWord={nameSearchWord}
-        setNameSearchWord={setNameSearchWord}
-      />
+      <section className='flex justify-center mt-10'>
+        <div className='w-11/12'>
+          <SearchForm
+            nameSearchWord={nameSearchWord}
+            setNameSearchWord={setNameSearchWord}
+          />
+          <p className='text-right mt-5'>
+            <b>{hitCount}</b>
+            件ヒット
+          </p>
+        </div>
+      </section>
 
-      <p>{ hitCount }件</p>
-
-      <div className='flex justify-center'>
-        <table className="w-11/12 mt-10">
+      <section className='flex justify-center mt-5'>
+        <table className="w-11/12">
           <thead>
             <tr className='text-left'>
               <th className="px-3 py-3 text-white bg-gray-700 rounded-tl">チーム名</th>
@@ -72,7 +151,7 @@ const Team: NextPage = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
     </>
   )
 }
