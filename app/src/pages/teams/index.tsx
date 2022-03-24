@@ -38,7 +38,6 @@ const SearchForm = (props: StateTypes) => {
             <div className='col-start-1 col-span-8'>
               <input
                 type='text'
-                defaultValue={props.nameSearchWord}
                 {...register('name')}
                 placeholder='チーム名を入力'
                 className='border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full' />
@@ -102,7 +101,6 @@ const SearchForm = (props: StateTypes) => {
             <div className='col-start-1 col-span-8'>
               <input
                 type='text'
-                defaultValue={props.nameSearchWord}
                 {...register('name')}
                 placeholder='チーム名を入力'
                 className='border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full' />
