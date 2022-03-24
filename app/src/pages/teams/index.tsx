@@ -19,47 +19,12 @@ const SearchForm = (props: NameStateType) => {
   const { nameSearchWord, setNameSearchWord } = props;
   const { register, handleSubmit, formState: { errors } } = useForm<InputsType>();
   const onSubmit: SubmitHandler<InputsType> = data => setNameSearchWord(data.name);
-  const [isClicked, setIsClicked] = useState<boolean>(false)
+  const [isAdvancedSearch, setIsAdvancedSearch] = useState<boolean>(false)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-5 rounded shadow-md">
-      {isClicked ?
+      {isAdvancedSearch ?
         (
-          <div className='grid grid-cols-12 grid-rows-1'>
-            <div className='col-start-1 col-span-9'>
-              <input
-                type="text"
-                defaultValue={nameSearchWord}
-                {...register("name")}
-                placeholder="チーム名を入力"
-                className="border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full" />
-              <p>{errors.name && <span>エラー：{errors}</span>}</p>
-            </div>
-
-            <div className='col-start-10 col-span-1 flex justify-center'>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mt-2 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="1"
-                onClick={() => setIsClicked(!isClicked)}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-
-            <div className='col-start-11 col-span-2 text-center'>
-              <button
-                type='submit'
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-              >
-                検索
-              </button>
-            </div>
-          </div>
-        ) : (
           <div className='grid grid-cols-12 grid-rows-2 gap-y-5'>
             <div className='col-start-1 col-span-9'>
               <input
@@ -79,7 +44,7 @@ const SearchForm = (props: NameStateType) => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth="1"
-                onClick={() => setIsClicked(!isClicked)}
+                onClick={() => setIsAdvancedSearch(!isAdvancedSearch)}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
               </svg>
@@ -90,6 +55,41 @@ const SearchForm = (props: NameStateType) => {
               <input type="date" className='p-1 border border-gray-300 focus:border-blue-500 focus:outline-none' />
               <span className='mx-3'>~</span>
               <input type="date" className='p-1 border border-gray-300 focus:border-blue-500 focus:outline-none' />
+            </div>
+
+            <div className='col-start-11 col-span-2 text-center'>
+              <button
+                type='submit'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+              >
+                検索
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className='grid grid-cols-12 grid-rows-1'>
+            <div className='col-start-1 col-span-9'>
+              <input
+                type="text"
+                defaultValue={nameSearchWord}
+                {...register("name")}
+                placeholder="チーム名を入力"
+                className="border-b p-2 border-gray-300 focus:border-blue-500 focus:outline-none w-full" />
+              <p>{errors.name && <span>エラー：{errors}</span>}</p>
+            </div>
+
+            <div className='col-start-10 col-span-1 flex justify-center'>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 mt-2 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1"
+                onClick={() => setIsAdvancedSearch(!isAdvancedSearch)}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
             </div>
 
             <div className='col-start-11 col-span-2 text-center'>
