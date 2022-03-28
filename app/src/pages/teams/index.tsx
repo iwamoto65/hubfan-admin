@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
-import { Dispatch, SetStateAction, useState } from 'react';
+import type { StateTypes, InputsType } from 'src/types/team';
+import { useState } from 'react';
 import useSWR from 'swr';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { fetchData } from 'src/utils/api/fetchData';
+import { buildRansackQuery } from 'src/utils/query/ransackQuery';
 import { UpwardArrowIcon } from 'src/components/atoms/icons/UpwardArrowIcon';
 import { DownwardArrowIcon } from 'src/components/atoms/icons/DownwardArrowIcon';
 import { TrashIcon } from 'src/components/atoms/icons/TrashIcon';
@@ -10,27 +12,16 @@ import { BlueSearchButton } from 'src/components/atoms/buttons/BlueSearchButton'
 import { GreenEditButton } from 'src/components/atoms/buttons/GreenEditButton';
 import { RedDeleteButton } from 'src/components/atoms/buttons/RedDeleteButton';
 
-type StateTypes = {
-  nameSearchWord: string
-  setNameSearchWord: Dispatch<SetStateAction<string>>
-  dateEstablishedGreaterThanSearch: string
-  setDateEstablishedGreaterThanSearch: Dispatch<SetStateAction<string>>
-  dateEstablishedLessThanSearch: string
-  setDateEstablishedLessThanSearch: Dispatch<SetStateAction<string>>
-}
-
-type InputsType = {
-  name: string
-  greaterThanDateEstablished: string
-  lessThanDateEstablished: string
-}
-
-const SearchForm = (props: StateTypes) => {
+const SearchForm: React.FC<StateTypes> = ({
+  setNameSearchWord,
+  setDateEstablishedGreaterThanSearch,
+  setDateEstablishedLessThanSearch
+}) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<InputsType>();
   const onSubmit: SubmitHandler<InputsType> = (data) => {
-    props.setNameSearchWord(data.name);
-    props.setDateEstablishedGreaterThanSearch(data.greaterThanDateEstablished);
-    props.setDateEstablishedLessThanSearch(data.lessThanDateEstablished);
+    setNameSearchWord(data.name);
+    setDateEstablishedGreaterThanSearch(data.greaterThanDateEstablished);
+    setDateEstablishedLessThanSearch(data.lessThanDateEstablished);
   };
   const [isAdvancedSearch, setIsAdvancedSearch] = useState<boolean>(false);
 
@@ -109,17 +100,14 @@ const Team: NextPage = () => {
   const [dateEstablishedGreaterThanSearch, setDateEstablishedGreaterThanSearch] = useState<string>('')
   const [dateEstablishedLessThanSearch, setDateEstablishedLessThanSearch] = useState<string>('')
 
-  const stateProps = {
-    nameSearchWord,
-    setNameSearchWord,
-    dateEstablishedGreaterThanSearch,
-    setDateEstablishedGreaterThanSearch,
-    dateEstablishedLessThanSearch,
-    setDateEstablishedLessThanSearch
-  }
+  const stateProps = { setNameSearchWord, setDateEstablishedGreaterThanSearch, setDateEstablishedLessThanSearch }
 
   const fetcher = async (path: string) => await fetchData(path);
-  const searchQuery = `?q[name_cont]=${nameSearchWord}&q[date_established_gteq]=${dateEstablishedGreaterThanSearch}&q[date_established_lteq]=${dateEstablishedLessThanSearch}`
+  const searchQuery = buildRansackQuery({
+    name_cont: nameSearchWord,
+    date_established_gteq: dateEstablishedGreaterThanSearch,
+    date_established_lteq: dateEstablishedLessThanSearch
+  });
   const { data: teams } = useSWR('/v1/teams' + searchQuery, fetcher);
 
   const hitCount: number = teams ? teams.length : 0;
