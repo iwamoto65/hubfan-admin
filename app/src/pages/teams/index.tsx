@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { fetchData } from 'src/utils/api/fetchData';
 import { UpwardArrowIcon } from 'src/components/atoms/icons/UpwardArrowIcon';
+import { DownwardArrowIcon } from 'src/components/atoms/icons/DownwardArrowIcon';
 import { TrashIcon } from 'src/components/atoms/icons/TrashIcon';
 import { BlueSearchButton } from 'src/components/atoms/buttons/BlueSearchButton';
 import { GreenEditButton } from 'src/components/atoms/buttons/GreenEditButton';
@@ -85,18 +86,8 @@ const SearchForm = (props: StateTypes) => {
               <p>{errors.name && <span>エラー：{errors}</span>}</p>
             </div>
 
-            <div className='col-start-9 col-span-1 flex justify-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6 mt-2 cursor-pointer'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth='1'
-                onClick={() => setIsAdvancedSearch(!isAdvancedSearch)}
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='M19 9l-7 7-7-7' />
-              </svg>
+            <div className='col-start-9 col-span-1 flex justify-center mt-2'>
+              <DownwardArrowIcon callback={setIsAdvancedSearch} arg={!isAdvancedSearch} />
             </div>
 
             <div className='col-start-10 col-span-1 flex justify-center mt-2'>
