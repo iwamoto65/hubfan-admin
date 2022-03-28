@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
-import useSWR from 'swr';
 import { Dispatch, SetStateAction, useState } from 'react';
+import useSWR from 'swr';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { fetchData } from 'src/utils/api/fetchData';
+import { TrashIcon } from 'src/components/atoms/icons/TrashIcon';
 import { GreenEditButton } from 'src/components/atoms/buttons/GreenEditButton';
 import { RedDeleteButton } from 'src/components/atoms/buttons/RedDeleteButton';
 
@@ -58,18 +59,8 @@ const SearchForm = (props: StateTypes) => {
               </svg>
             </div>
 
-            <div className='col-start-10 col-span-1 flex justify-center'>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mt-2 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                onClick={() => reset()}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
+            <div className='col-start-10 col-span-1 flex justify-center mt-2'>
+              <TrashIcon callback={reset} />
             </div>
 
             <div className='col-start-1 col-span-10'>
@@ -121,18 +112,8 @@ const SearchForm = (props: StateTypes) => {
               </svg>
             </div>
 
-            <div className='col-start-10 col-span-1 flex justify-center'>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mt-2 cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                onClick={() => reset()}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
+            <div className='col-start-10 col-span-1 flex justify-center mt-2'>
+              <TrashIcon callback={reset} />
             </div>
 
             <div className='col-start-11 col-span-2 text-center'>
