@@ -3,6 +3,7 @@ import type { StateTypes, InputsType } from 'src/types/team';
 import { useState } from 'react';
 import useSWR from 'swr';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import Link from 'next/link';
 import { fetchData } from 'src/utils/api/fetchData';
 import { buildRansackQuery } from 'src/utils/query/ransackQuery';
 import { UpwardArrowIcon } from 'src/components/atoms/icons/UpwardArrowIcon';
@@ -113,8 +114,17 @@ const Team: NextPage = () => {
   return (
     <>
       <section className='flex justify-center mt-10'>
-        <div className='w-11/12'>
-          <SearchForm {...stateProps} />
+        <div className='w-11/12 grid grid-cols-12'>
+          <div className='col-span-10'>
+            <SearchForm {...stateProps} />
+          </div>
+          <div className='col-span-2 text-center'>
+            <Link href='teams/new'>
+              <button className="mt-5 bg-transparent hover:bg-gray-500 text-gray-600 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded-full">
+                新規作成
+              </button>
+            </Link>
+          </div>
         </div>
       </section>
 
