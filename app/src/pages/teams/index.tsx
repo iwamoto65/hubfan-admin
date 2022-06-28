@@ -110,17 +110,11 @@ const Team: NextPage = () => {
   });
   const { data: teams } = useSWR('/v1/teams' + searchQuery, fetcher);
 
-  const hitCount: number = teams ? teams.length : 0;
-
   return (
     <>
       <section className='flex justify-center mt-10'>
         <div className='w-11/12'>
           <SearchForm {...stateProps} />
-          <p className='text-right mt-5'>
-            <b>{hitCount}</b>
-            件ヒット
-          </p>
         </div>
       </section>
 
@@ -136,7 +130,7 @@ const Team: NextPage = () => {
           </thead>
           <tbody>
             {teams?.map(team => (
-              <tr className='text-left border-b border-gray-300' key={team.id}>
+              <tr className='text-left border-b border-gray-400 bg-white' key={team.id}>
                 <td className='px-3 py-3'>{ team.name }</td>
                 <td className='px-3 py-3'>{ team.dateEstablished }</td>
                 <td className='px-3 py-3'><GreenEditButton path={`teams/${team.id}`} /></td>
